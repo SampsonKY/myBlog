@@ -33,6 +33,7 @@ module.exports = appInfo => {
       user: 'root',
       // password
       password: 'e80d6a5511f9cabb',
+      // password: '0305kk..',
       // database
       database: 'react_blog',
     },
