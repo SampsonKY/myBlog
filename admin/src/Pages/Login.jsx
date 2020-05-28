@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+﻿import React,{useState} from 'react'
 import 'antd/dist/antd.css'
 import {Card, Input, Button, Spin,message,Icon} from 'antd'
 
@@ -47,7 +47,9 @@ function Login(props){
                 }
             }
         )
-
+	setTimeout(()=>{
+                setIsLoding(false)
+            },1000)
 
     }
     return(
