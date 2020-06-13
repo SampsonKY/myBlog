@@ -4,6 +4,10 @@ import {Route} from 'react-router-dom'
 import AddArticle from './AddArticle'
 import '../static/css/AdminIndex.css'
 import ArticleList from './ArticleList';
+import axios from 'axios'
+import servicePath from '../config/apiUrl'
+import {message} from 'antd'
+
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -17,12 +21,30 @@ const onCollapse = collapsed => {
 };
 
 const handleClickArticle = e=>{
-  console.log(e)
   if(e.key === 'addArticle'){
     props.history.push('/index/add')
-  }else{
+  } else if (e.key === 'articleList'){
     props.history.push('/index/list')
   }
+}
+
+const handleLogout = e=>{
+  localStorage.removeItem('openId')
+  axios({
+    method: 'get',
+    url: servicePath.logOut,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true
+  }).then(
+    res => {
+      if (res.data.data === '退出成功') {
+        message.success('退出成功')
+        setTimeout(()=>{
+          props.history.push('/')
+        },1000)
+      }
+    }
+  )
 }
 
 return (
@@ -53,9 +75,9 @@ return (
 
             </SubMenu>
 
-            <Menu.Item key="9">
-              {/* <Icon type="file" /> */}
-              <span>留言管理</span>
+            <Menu.Item onClick={handleLogout} key="logout">
+              <Icon type="logout" />
+              <span>退出登陆</span>
             </Menu.Item>
           </Menu>
         </Sider>

@@ -8,6 +8,10 @@ class MainController extends Controller {
     this.ctx.body = 'hi api';
   }
 
+  async logOut() {
+    this.ctx.session.openId = null;
+    this.ctx.body = { data: '退出成功' };
+  }
 
   async checkLogin() {
     const userName = this.ctx.request.body.userName;
