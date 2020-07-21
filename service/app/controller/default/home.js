@@ -12,10 +12,11 @@ class HomeController extends Controller {
     const sql = 'SELECT article.id as id,' +
            'article.title as title,' +
            'article.introduce as introduce,' +
-           "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime," +
+           "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
            'article.view_count as view_count ,' +
            'type.typeName as typeName ' +
-           'FROM article,type where article.type_id = type.Id';
+          'FROM article LEFT JOIN type ON article.type_id = type.Id ' +
+           'ORDER BY id DESC';
 
     const results = await this.app.mysql.query(sql);
 
@@ -27,24 +28,29 @@ class HomeController extends Controller {
   async getArticleById() {
     // 先配置路由的动态传值，然后再接收值
     const id = this.ctx.params.id;
-
-    const sql = 'SELECT article.id as id,' +
+    if(id){
+      let sql1 = 'UPDATE article SET view_count = (view_count+1) WHERE id='+id;
+      let updateRes = await this.app.mysql.query(sql1);
+      let updateSuccess = updateRes.affectedRows === 1
+      if (updateSuccess) {
+        const sql = 'SELECT article.id as id,' +
           'article.title as title,' +
           'article.introduce as introduce,' +
           'article.article_content as article_content,' +
-          "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime," +
+          "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
           'article.view_count as view_count ,' +
           'type.typeName as typeName ,' +
           'type.id as typeId ' +
           'FROM article,type where article.type_id = type.Id and ' +
           'article.id=' + id;
 
-    const result = await this.app.mysql.query(sql);
+        const result = await this.app.mysql.query(sql);
 
-    this.ctx.body = {
-      data: result,
-    };
-
+        this.ctx.body = {
+          data: result,
+        };
+      }
+    }
   }
 
   // 得到类别名称和编号
@@ -59,7 +65,7 @@ class HomeController extends Controller {
     const sql = 'SELECT article.id as id,' +
             'article.title as title,' +
             'article.introduce as introduce,' +
-            "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime," +
+            "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
             'article.view_count as view_count ,' +
             'type.typeName as typeName ' +
             'FROM article LEFT JOIN type ON article.type_id = type.Id ' +
@@ -70,7 +76,6 @@ class HomeController extends Controller {
     };
 
   }
-
 }
 
 

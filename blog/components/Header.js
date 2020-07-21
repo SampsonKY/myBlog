@@ -30,12 +30,12 @@ const Header = ()=>{
     
     return(
         <div className="header">
-            <Row type="flex" justify="center">
-                <Col  xs={24} sm={24} md={16} lg={18} xl={14}>
+            <Row type="flex" justify="right">
+                <Col className="tag"  xs={24} sm={24} md={9} >
                     <span className="header-logo">SampsonKY</span>
                     <span className="header-txt">专注前端开发</span>
                 </Col>
-                <Col className="menu-div" xs={0} sm={0} md={7} lg={5} xl={4}>
+                <Col className="menu-div" xs={0} sm={0} md={15}>
                     <Menu mode="horizontal" onClick={handleClick}>
                         <Menu.Item key="0">
                             <Icon type="home" />

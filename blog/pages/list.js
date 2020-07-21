@@ -26,12 +26,12 @@ export default function MyList(list) {
       <Row className="comm-main" type="flex" justify="center">
       <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
 
-        <div className="bread-div">
+        {/* <div className="bread-div">
             <Breadcrumb>
                 <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                <Breadcrumb.Item>视频教程</Breadcrumb.Item>
+  <Breadcrumb.Item>{mylist.name}</Breadcrumb.Item>
             </Breadcrumb>
-        </div>
+        </div> */}
 
         <List
           header={<div>最新日志</div>}

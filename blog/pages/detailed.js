@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import {Row,Col,Breadcrumb,Affix,Icon} from 'antd'
+import {Row,Col,Breadcrumb,Affix,Icon,BackTop} from 'antd'
 import axios from 'axios'
 
 import marked from 'marked'
@@ -10,11 +10,11 @@ import Tocify from '../components/tocify.tsx'
 
 import Header from '../components/Header'
 import Author from '../components/Author'
-import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 import '../public/style/pages/detailed.css'
 
 import servicePath from '../config/apiUrl'
+
 
 export default function Detailed(props) {
 
@@ -40,6 +40,8 @@ export default function Detailed(props) {
 
   let html = marked(props.article_content)
  
+
+
   return (
     <div>
       <Head>
@@ -75,7 +77,6 @@ export default function Detailed(props) {
 
       <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
         <Author/>
-        <Advert/>
         <Affix offsetTop={5}>
           <div className="detailed-nav comm-box">
             <div className="nav-title">文章目录</div>
@@ -85,6 +86,9 @@ export default function Detailed(props) {
       </Col>
     </Row>
     <Footer/>
+
+    <BackTop />
+    
     </div>
   )
 }
@@ -95,7 +99,6 @@ Detailed.getInitialProps = async(context)=>{
   const promise = new Promise((resolve) => {
     axios(servicePath.getAriticleById + id).then(
       (res) => {
-        console.log(res.data)
         resolve(res.data.data[0])
       }
     )

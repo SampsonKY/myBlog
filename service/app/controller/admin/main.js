@@ -58,7 +58,6 @@ class MainController extends Controller {
     this.ctx.body = {
       isSuccess: updateSuccess,
     };
-
   }
 
   async getArticleList() {

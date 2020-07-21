@@ -10,6 +10,11 @@
     font-size: 1.4rem;
     text-align: left;
 }
+.tag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .header-txt{
     font-size: 0.6rem;
     color: #999;

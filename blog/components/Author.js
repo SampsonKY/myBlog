@@ -1,4 +1,4 @@
-import {Avatar, Divider,Icon} from 'antd'
+import {Avatar, Divider, Tooltip} from 'antd'
 import '../public/style/components/Author.css'
 
 const Author = ()=>{
@@ -8,9 +8,14 @@ const Author = ()=>{
             <div className="author-introduction">
                 专注web
                 <Divider>社交账号</Divider>
-                <Avatar size={28} icon="github"className="account"/>
-                <Avatar size={28} icon="qq"className="account"/>
-                <Avatar size={28} icon="wechat"className="account"/>
+                <Tooltip title="https://github.com/SampsonKY">
+                    <a href="https://github.com/SampsonKY" target="_blank">
+                    <Avatar size={28} icon="github" className="account"  />
+                    </a>
+                </Tooltip>
+                <Tooltip title="QQ:1911171549">
+                    <Avatar size={28} icon="qq"  className="account" />
+                </Tooltip>
             </div>
         </div>
     )
