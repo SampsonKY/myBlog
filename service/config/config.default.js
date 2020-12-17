@@ -27,6 +27,7 @@ module.exports = appInfo => {
     client: {
       // host
       host: '0.0.0.0',
+      // host: 'localhost',
       // port
       port: '3306',
       // username
@@ -43,6 +44,14 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  config.session = {
+    key:"SESSION_ID",
+    maxAge:86400,
+    renew: true,
+    httpOnly: true,
+    encrypt:true
+  };
+
   config.security = {
     csrf: {
       enable: false,
@@ -52,7 +61,7 @@ module.exports = appInfo => {
   config.cors = {
     // origin: 'http://localhost:3001',
     credentials: true, // 允许cookis跨域
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,OPTIONS',
+    allowMethods: 'GET,POST',
   };
 
   return {
