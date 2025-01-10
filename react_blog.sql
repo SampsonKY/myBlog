@@ -1,5 +1,5 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Data Transfer.
 
  Source Server         : react_blog
  Source Server Type    : MySQL
